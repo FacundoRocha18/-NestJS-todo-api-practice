@@ -22,7 +22,7 @@ describe('AppController', () => {
       data: tasks || [],
     };
 
-    it('should return an object with:\n "ok" (true || false),\n "message" (Data succesfully fetched || Failed to fetch data),\n "data" (tasks.json)', () => {
+    it('should return an object with this fields:\n "ok" (true || false),\n "message" (Data succesfully fetched || Failed to fetch data),\n "data" (tasks.json)', () => {
       expect(tasksController.findAll()).toEqual(expectedResponse);
     });
   });
