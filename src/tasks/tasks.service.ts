@@ -1,14 +1,40 @@
 import { Injectable } from '@nestjs/common';
-import { IfindAllResponse } from './interfaces/tasks.interfaces';
-import { tasks } from '../data/tasks.json';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { IcreateResponse } from './interfaces/tasks.interfaces';
+import { Tasks } from './tasks.entity';
 
 @Injectable()
 export class TasksService {
-  findAll(): IfindAllResponse {
+  constructor(
+    @InjectRepository(Tasks)
+    private tasksRepository: Repository<Tasks>,
+  ) {}
+
+  findAll(): Promise<Tasks[]> {
+    return this.tasksRepository.find();
+  }
+
+  /* findAll(): IfindAllResponse {
     return {
       ok: true,
       message: 'Data succesfully fetched',
-      data: tasks,
+      data: this.tasksRepository.find(),
+    };
+  } */
+
+  create(): IcreateResponse {
+    let createdTaskResponse;
+    try {
+      createdTaskResponse = this.tasksRepository.create();
+    } catch (error) {
+      console.log(error);
+    }
+
+    return {
+      ok: true,
+      message: 'Created new task',
+      createdTask: createdTaskResponse,
     };
   }
 }

@@ -7,7 +7,11 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Get()
-  findAll(): IfindAllResponse {
-    return this.tasksService.findAll();
+  async findAll(): Promise<IfindAllResponse> {
+    return {
+      ok: true,
+      message: 'Data succesfully fetched',
+      data: await this.tasksService.findAll(),
+    };
   }
 }

@@ -1,13 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppModule } from '../app.module';
+import { Tasks } from './tasks.entity';
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
-import { tasks } from '../data/tasks.json';
 
 describe('AppController', () => {
   let tasksController: TasksController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
+      imports: [TypeOrmModule.forFeature([Tasks]), AppModule],
       controllers: [TasksController],
       providers: [TasksService],
     }).compile();
@@ -19,11 +22,13 @@ describe('AppController', () => {
     const expectedResponse = {
       ok: true || false,
       message: 'Data succesfully fetched' || 'Failed to fetch data',
-      data: tasks || [],
+      data: [],
     };
 
-    it('should return an object with this fields:\n "ok" (true || false),\n "message" (Data succesfully fetched || Failed to fetch data),\n "data" (tasks.json)', () => {
-      expect(tasksController.findAll()).toEqual(expectedResponse);
+    it('should return an object with this fields:\n "ok" (true || false),\n "message" (Data succesfully fetched || Failed to fetch data),\n "data" (tasks array from DB)', () => {
+      return tasksController.findAll().then((response) => {
+        expect(response).toBe(expectedResponse);
+      });
     });
   });
 });

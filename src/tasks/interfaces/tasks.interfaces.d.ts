@@ -1,13 +1,25 @@
+import { UUID } from 'crypto';
+import { Timestamp } from 'typeorm';
+import { Tasks } from '../task.entity';
+
 export interface Itask {
-  uuid: string;
+  uuid: UUID;
   title: string;
   content: string;
+  created_at: Timestamp;
 }
 
-export type TaskDto = Omit<'uuid'>;
+export type TaskDto = Omit<Itask, 'uuid', 'created_at'>;
 
-export interface IfindAllResponse {
+export interface IResponse {
   ok: boolean;
   message: string;
+}
+
+export interface IfindAllResponse extends IResponse {
   data: Itask[];
+}
+
+export interface IcreateResponse extends IResponse {
+  createdTask: Tasks | undefined;
 }

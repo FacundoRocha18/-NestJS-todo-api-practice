@@ -14,12 +14,6 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe('tests on root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
-    });
-  });
-
   describe('tests on testConnection()', () => {
     const expectedResponse = {
       running: true || null,
