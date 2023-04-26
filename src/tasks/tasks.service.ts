@@ -15,14 +15,6 @@ export class TasksService {
     return this.tasksRepository.find();
   }
 
-  /* findAll(): IfindAllResponse {
-    return {
-      ok: true,
-      message: 'Data succesfully fetched',
-      data: this.tasksRepository.find(),
-    };
-  } */
-
   create(): IcreateResponse {
     let createdTaskResponse;
     try {
@@ -34,7 +26,7 @@ export class TasksService {
     return {
       ok: true,
       message: 'Created new task',
-      createdTask: createdTaskResponse,
+      createdTaskId: createdTaskResponse?.uuid,
     };
   }
 }

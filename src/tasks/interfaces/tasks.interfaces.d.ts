@@ -21,5 +21,5 @@ export interface IfindAllResponse extends IResponse {
 }
 
 export interface IcreateResponse extends IResponse {
-  createdTask: Tasks | undefined;
+  createdTaskId: Tasks | undefined;
 }

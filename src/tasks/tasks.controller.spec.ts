@@ -25,10 +25,8 @@ describe('AppController', () => {
       data: [],
     };
 
-    it('should return an object with this fields:\n "ok" (true || false),\n "message" (Data succesfully fetched || Failed to fetch data),\n "data" (tasks array from DB)', () => {
-      return tasksController.findAll().then((response) => {
-        expect(response).toBe(expectedResponse);
-      });
+    it('should return an object with this fields:\n "ok" (true || false),\n "message" (Data succesfully fetched || Failed to fetch data),\n "data" (tasks array from DB)', async () => {
+      return expect(await tasksController.findAll()).toEqual(expectedResponse);
     });
   });
 });
