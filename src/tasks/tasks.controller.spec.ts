@@ -5,7 +5,7 @@ import { Tasks } from './tasks.entity';
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
 
-describe('AppController', () => {
+describe('TasksController', () => {
   let tasksController: TasksController;
 
   beforeEach(async () => {
@@ -18,7 +18,7 @@ describe('AppController', () => {
     tasksController = app.get<TasksController>(TasksController);
   });
 
-  describe('tests on findAll()', () => {
+  describe('tests on tasks controller', () => {
     const expectedResponse = {
       ok: true || false,
       message: 'Data succesfully fetched' || 'Failed to fetch data',
@@ -26,7 +26,7 @@ describe('AppController', () => {
     };
 
     it('should return an object with this fields:\n "ok" (true || false),\n "message" (Data succesfully fetched || Failed to fetch data),\n "data" (tasks array from DB)', async () => {
-      return expect(await tasksController.findAll()).toEqual(expectedResponse);
+      return expect(await tasksController.listAll()).toEqual(expectedResponse);
     });
   });
 });

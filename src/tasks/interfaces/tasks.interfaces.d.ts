@@ -16,10 +16,14 @@ export interface IResponse {
   message: string;
 }
 
+export interface IfindOneByIdResponse extends IResponse {
+  data: Itask;
+}
+
 export interface IfindAllResponse extends IResponse {
   data: Itask[];
 }
 
 export interface IcreateResponse extends IResponse {
-  createdTaskId: Tasks | undefined;
+  createdTaskId: UUID | undefined;
 }

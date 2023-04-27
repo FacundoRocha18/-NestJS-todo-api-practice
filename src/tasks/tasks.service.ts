@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UUID } from 'crypto';
 import { Repository } from 'typeorm';
 import { IcreateResponse } from './interfaces/tasks.interfaces';
 import { Tasks } from './tasks.entity';
@@ -11,7 +12,11 @@ export class TasksService {
     private tasksRepository: Repository<Tasks>,
   ) {}
 
-  findAll(): Promise<Tasks[]> {
+  findOneBy(uuid: UUID): Promise<Tasks | null> {
+    return this.tasksRepository.findOneBy({ uuid });
+  }
+
+  listAll(): Promise<Tasks[]> {
     return this.tasksRepository.find();
   }
 
