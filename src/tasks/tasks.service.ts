@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UUID } from 'crypto';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { CreateTaskDto } from './DTO/create-task.dto';
 import { IcreateResponse } from './interfaces/tasks.interfaces';
 import { Tasks } from './tasks.entity';
 
@@ -20,18 +21,12 @@ export class TasksService {
     return this.tasksRepository.find();
   }
 
-  create(): IcreateResponse {
-    let createdTaskResponse;
-    try {
-      createdTaskResponse = this.tasksRepository.create();
-    } catch (error) {
-      console.log(error);
-    }
+  create(body: CreateTaskDto): Promise<Tasks> {
+    const task = this.tasksRepository.create(body);
+    return this.tasksRepository.save(task);
+  }
 
-    return {
-      ok: true,
-      message: 'Created new task',
-      createdTaskId: createdTaskResponse?.uuid,
-    };
+  delete(uuid: UUID): Promise<DeleteResult> {
+    return this.tasksRepository.delete({ uuid });
   }
 }
