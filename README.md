@@ -24,7 +24,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Esta API recibe solicitudes por medio de un cliente HTTP como Postman o Thunder Client y almacena tareas pendientes o "To Do". 
+
+La API puede recibir solitudes con un titulo y contenido para crear una tarea, a esos datos le agrega un UUID y un TimeStamp y posteriormente lo almacena en una base de datos. Luego se puede buscar esa tarea con el ID o listar todas las tareas almacenadas, eliminar por ID o eliminar todas y modificar una tarea con ID. Esta API hace uso de TypeOrm, TypeScript, PostgreSql, Express y Programación orientada a objetos.
 
 ## Installation
 
